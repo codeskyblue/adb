@@ -8,6 +8,9 @@ COPY files/insecure_shared_adbkey /root/.android/adbkey
 COPY files/insecure_shared_adbkey.pub /root/.android/adbkey.pub
 
 COPY adb /usr/bin/
+
+ENV ANDROID_ADB_SERVER_PORT 5037
 EXPOSE 5037
+
 ENTRYPOINT ["/sbin/tini", "--", "adb"]
-CMD ["-a", "-P", "5037", "server", "nodaemon"]
+CMD ["-a", "server", "nodaemon"]
